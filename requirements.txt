@@ -1,0 +1,6 @@
+chainlit
+langchain
+langchain-community
+langchain-chroma
+sentence_transformers
+Pillow
