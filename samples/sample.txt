@@ -1,0 +1,40 @@
+# General Conversation:
+
+How are you today, Choi?
+Why am I in the hospital?
+Did I take my medicine today?
+Have you seen mom recently?
+Why do I forget things all the time?
+
+# Health and Alzheimer's Disease:
+
+Why am I sick?
+Is there any new treatment for Alzheimer’s?
+Can I get better from this illness?
+Will I remember more if I keep taking the medicine?
+
+
+# Project or Research Discussion (Related to Choi's Background):
+
+Tell me about your Digital Cure project."
+How does AI help with Alzheimer's disease?"
+Are you working on anything that can make me feel better?"
+Do I still need to go to the hospital often?"
+
+# Family and Personal Questions:
+
+Did you eat breakfast today?
+What was I like when I was younger?
+Can you remind me about our trip to the beach?
+Did we celebrate any special occasions this year?
+
+# In Korean (Polite):
+
+너는 오늘 어떻게 지냈니? (How have you been today?)
+내가 왜 병원에 있니? (Why am I in the hospital?)
+엄마는 잘 지내시니? (Is mom doing well?)
+내 병은 나아질 수 있니? (Can I get better from my illness?)
+오늘 아침에 약 먹었니? (Did I take my medicine this morning?)
+
+# Image (insert the sample_pic.jpg)
+Can you tell me what the image is about?
