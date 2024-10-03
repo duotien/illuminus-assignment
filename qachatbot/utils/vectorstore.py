@@ -1,5 +1,6 @@
-from qachatbot import PERSIST_DIR, MD_PERSIST_DIR
 from langchain_chroma import Chroma
+
+from qachatbot import DB_PERSIST_DIR
 
 
 class VectorStoreManager:
@@ -11,8 +12,7 @@ class VectorStoreManager:
     def chromadb(self):
         if self._chromadb is None:
             self._chromadb = Chroma(
-                persist_directory=PERSIST_DIR,
+                persist_directory=DB_PERSIST_DIR,
                 embedding_function=self.embedding_function,
             )
         return self._chromadb
-

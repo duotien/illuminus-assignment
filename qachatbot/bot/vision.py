@@ -31,7 +31,6 @@ def convert_to_base64(pil_image):
 #     display(HTML(image_html))
 
 
-
 # file_path = "../../../static/img/ollama_example_img.jpg"
 # pil_image = Image.open(file_path)
 # image_b64 = convert_to_base64(pil_image)

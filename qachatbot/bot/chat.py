@@ -2,11 +2,10 @@ import os
 from typing import Any, Dict
 
 import chainlit as cl
+import PIL.Image
 from langchain.schema.runnable import Runnable
 from langchain.schema.runnable.config import RunnableConfig
-import PIL.Image
 
-from qachatbot import PERSIST_DIR, MD_PERSIST_DIR
 from qachatbot.bot.vision import convert_to_base64
 from qachatbot.commands import commands
 
@@ -24,7 +23,9 @@ def process_command(content: str):
 
 
 async def process_response(message: cl.Message):
-    runnable_with_history = cl.user_session.get("runnable_with_history")  # type: Runnable
+    runnable_with_history = cl.user_session.get(
+        "runnable_with_history"
+    )  # type: Runnable
     response = cl.Message(content="")
 
     async for chunk in runnable_with_history.astream(
@@ -45,7 +46,7 @@ async def process_response_with_vision(message: cl.Message):
     llm_has_clip = cl.user_session.get("llm_has_clip")
     response = cl.Message(content="")
     if not llm_has_clip:
-        response.content = "Sorry, I cannot handle image."
+        response.content = "Sorry, it seems like you are trying to send me an image, but I cannot see it."
         await response.send()
         return response
     await process_uploaded(message)
@@ -53,9 +54,9 @@ async def process_response_with_vision(message: cl.Message):
 
 # TODO: add button to change k
 async def process_rag(user_input: str, k=5):
-    runnable = cl.user_session.get("runnable")
+    runnable_with_history = cl.user_session.get("runnable_with_history")
     response = cl.Message(content="")
-    async for chunk in runnable.astream(
+    async for chunk in runnable_with_history.astream(
         user_input,
         config=RunnableConfig(
             callbacks=[cl.LangchainCallbackHandler()],
@@ -82,7 +83,9 @@ async def process_uploaded(message):
             image = image.convert("RGB")
             image = convert_to_base64(image)
 
-            runnable_with_history = cl.user_session.get("runnable_with_history")  # type: Runnable
+            runnable_with_history = cl.user_session.get(
+                "runnable_vision_with_history"
+            )  # type: Runnable
             response = cl.Message(content="")
             async for chunk in runnable_with_history.astream(
                 input={

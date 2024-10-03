@@ -2,5 +2,6 @@ chainlit
 langchain
 langchain-community
 langchain-chroma
+langchain-ollama
 sentence_transformers
 Pillow

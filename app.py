@@ -2,7 +2,7 @@ import os
 
 import chainlit as cl
 
-from qachatbot.bot.bot import init_settings, setup_chatbot, setup_qabot
+from qachatbot.bot.bot import init_settings, setup_chatbot, setup_ragbot
 from qachatbot.bot.chat import (
     process_command,
     process_rag,
@@ -36,19 +36,15 @@ async def on_message(message: cl.Message):
 
     else:
         chat_mode = cl.user_session.get("chat_mode")
-        if chat_mode == "chat":
+        if chat_mode == "rag":
             try:
                 if message.elements:
                     await process_response_with_vision(message)
                 else:
-                    response = await process_response(message)
-
+                    response = await process_rag(message.content)
             except Exception as e:
                 await cl.Message(response).send()
                 raise e
-
-        if chat_mode == "rag":
-            response = await process_rag(message.content)
 
 
 @cl.on_settings_update
@@ -60,16 +56,7 @@ async def setup_agent(settings):
     match settings["DB"]:
         case "Chroma":
             cl.user_session.set("vectorstore", vectorstore_manager.chromadb)
-        case "Markdown":
-            cl.user_session.set("vectorstore", vectorstore_manager.markdown_chromadb)
-        case _:
-            # TODO: add another database here
-            cl.user_session.set("vectorstore", vectorstore_manager.chromadb)
 
     match chat_mode:
-        case "chat":
-            setup_chatbot(settings)
         case "rag":
-            setup_qabot(settings)
-        case _:
-            setup_chatbot(settings)
+            setup_ragbot(settings)
