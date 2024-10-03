@@ -122,12 +122,12 @@ async def init_settings():
 def setup_ragbot(settings: Dict[str, Any]):
     vectorstore: Chroma = cl.user_session.get("vectorstore")
     retriever = vectorstore.as_retriever(
-        search_type="similarity", search_kwargs={"k": 1}
+        search_type="similarity", search_kwargs={"k": 2}
     )
 
     llm = ChatOllama(
         model=settings["model"],
-        temperature=0.5,
+        temperature=0.8,
         base_url=BASE_OLLAMA_URL,
     )
 

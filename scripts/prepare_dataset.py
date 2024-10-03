@@ -1,4 +1,3 @@
-# %%
 import os
 import sys
 
@@ -11,7 +10,6 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from qachatbot import PROJECT_DIR, DB_PERSIST_DIR, DOCUMENTS_DIR
 
-# %%
 if os.path.exists(DB_PERSIST_DIR):
     import shutil
     shutil.rmtree(DB_PERSIST_DIR)
@@ -23,7 +21,7 @@ doc_generator = (TextLoader(doc_path, encoding="utf-8") for doc_path in doc_path
 docs = [loader.load()[0] for loader in doc_generator]
 
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000, chunk_overlap=100, add_start_index=True
+    chunk_size=1000, chunk_overlap=200, add_start_index=True
 )
 all_splits = text_splitter.split_documents(docs)
 
